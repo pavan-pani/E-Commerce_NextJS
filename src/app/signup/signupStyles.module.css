@@ -5,7 +5,7 @@
     @apply relative py-3 sm:w-96 mx-auto text-center
 }
 .form_card{
-    @apply mt-5 bg-white shadow-md rounded-lg text-left
+    @apply mt-5 bg-white shadow-2xl rounded-lg text-left
 }
 .label{
     @apply flex font-medium mt-4 
