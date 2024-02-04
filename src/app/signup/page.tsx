@@ -1,8 +1,23 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 import styles from './signupStyles.module.css'
 import Link from 'next/link'
 
 const Signup = () => {
+
+    const [signup, setSignup] = useState({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
+    })
+
+    const onsignup = (formData: any) => {
+        console.log(formData);
+
+    }
+
+
     return (
         <div className={styles.loginContainer}>
             <div className={styles.form_Container}>
@@ -12,34 +27,42 @@ const Signup = () => {
                     <div className='px-8 py-6'>
                         <label className={styles.label}>Name</label>
                         <input
+                            className={styles.input}
                             type="text"
                             placeholder="Name"
-                            className={styles.input}
+                            value={signup.name}
+                            onChange={(e) => setSignup({ ...signup, name: e.target.value })}
                         />
                         <label className={styles.label}>Email <p className='text-red-500'>*</p></label>
                         <input
-                            type="text"
-                            placeholder="Email"
                             className={styles.input}
+                            type="email"
+                            placeholder="Email"
+                            value={signup.email}
+                            onChange={(e) => setSignup({ ...signup, email: e.target.value })}
                             required
                         />
                         <label className={styles.label}>Password <p className='text-red-500'>*</p></label>
                         <input
-                            type="text"
-                            placeholder="Password"
                             className={styles.input}
+                            type="password"
+                            placeholder="Password"
+                            value={signup.password}
+                            onChange={(e) => setSignup({ ...signup, password: e.target.value })}
                             required
                         />
                         <label className={styles.label}>Confirm Password <p className='text-red-500'>*</p></label>
                         <input
-                            type="text"
-                            placeholder="Confirm Password"
                             className={styles.input}
+                            type="password"
+                            placeholder="Confirm Password"
+                            value={signup.confirmPassword}
+                            onChange={(e) => setSignup({ ...signup, confirmPassword: e.target.value })}
                             required
                         />
                         <div className='flex justify-between items-baseline'>
-                            <button type='submit' className={styles.button}>Signup</button>
-                            <Link className='text-sm hover:underline' href='/login'>Alredy have account?</Link>
+                            <button type='submit' className={styles.button} onClick={() => onsignup({ ...signup })}>Signup</button>
+                            <Link className='text-sm hover:underline' href='/login'>Already have account?</Link>
                         </div>
                     </div>
                 </div>
