@@ -1,0 +1,18 @@
+.loginContainer{ 
+    @apply min-h-screen py-6 justify-center bg-gray-100 antialiased flex flex-col sm:py-12;
+}
+.form_Container{
+    @apply relative py-3 sm:w-96 mx-auto text-center
+}
+.form_card{
+    @apply mt-5 bg-white rounded-lg text-left shadow-2xl
+}
+.label{
+    @apply flex mt-4 font-medium
+}
+.input{
+    @apply border w-full h-5 px-3 py-4 mt-2 hover:outline-none focus:shadow-md focus:outline-none focus:ring-1 focus:ring-indigo-400 rounded-md
+}
+.button{
+    @apply mt-4 bg-indigo-500 text-white py-2 px-6 rounded-md hover:bg-indigo-700
+}
