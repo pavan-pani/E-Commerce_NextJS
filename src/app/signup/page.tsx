@@ -2,9 +2,13 @@
 import React, { useState } from 'react'
 import styles from './signupStyles.module.css'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import axios from 'axios'
 
 const Signup = () => {
 
+    const router = useRouter()
+    const [signUpBtnDisabled, setSignUpBtnDisabled] = useState(false)
     const [signup, setSignup] = useState({
         name: "",
         email: "",
@@ -12,8 +16,20 @@ const Signup = () => {
         confirmPassword: ""
     })
 
-    const onsignup = (formData: any) => {
-        console.log(formData);
+    const onSignup = async (event:any) => {
+        event.preventDefault()
+        try {
+            // const signUpResponce = await axios.post("/api/users/signup", signup)
+            // // console.log("sign up success", signUpResponce.data);
+            // router.push("/login")
+            const response = await axios.post("/api/users/signup", signup);
+            console.log("Signup success", response.data);
+            router.push("/login");
+
+        } catch (error) {
+            console.log("sign-up failed", error);
+        }
+        console.log(signup);
 
     }
 
@@ -24,14 +40,16 @@ const Signup = () => {
                 <h1 className='text-3xl font-light'>Signup to your account</h1>
                 <div className={styles.form_card}>
                     <div className='h-2 bg-indigo-400 rounded-t-md'></div>
+                    
                     <div className='px-8 py-6'>
-                        <label className={styles.label}>Name</label>
+                        <label className={styles.label}>Name <p className='text-red-500'>*</p></label>
                         <input
                             className={styles.input}
                             type="text"
                             placeholder="Name"
                             value={signup.name}
                             onChange={(e) => setSignup({ ...signup, name: e.target.value })}
+                            required
                         />
                         <label className={styles.label}>Email <p className='text-red-500'>*</p></label>
                         <input
@@ -61,7 +79,7 @@ const Signup = () => {
                             required
                         />
                         <div className='flex justify-between items-baseline'>
-                            <button type='submit' className={styles.button} onClick={() => onsignup({ ...signup })}>Signup</button>
+                            <button type='submit' className={styles.button} onClick={onSignup}>Signup</button>
                             <Link className='text-sm hover:underline' href='/login'>Already have account?</Link>
                         </div>
                     </div>
