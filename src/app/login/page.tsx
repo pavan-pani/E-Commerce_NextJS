@@ -1,16 +1,28 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './loginStyles.module.css'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import axios from 'axios'
 
 const Login = () => {
 
+    const router=useRouter()
+    const [ButtonDisabled, setButtonDisabled] =useState(false)
     const [login, setLogin] = useState({
         email: "",
         password: ""
     })
 
-    const onlogin = (formData: any) => {
+    const onlogin = async (formData: any) => {
+        try {
+           const res = await axios.post("/api/users/login", formData)
+           console.log("login success", res);
+           router.push("/")
+           
+        } catch (error:any) {
+            console.log("login failed..!");
+        }
         console.log(formData);
     }
 
