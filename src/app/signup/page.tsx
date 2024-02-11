@@ -16,12 +16,9 @@ const Signup = () => {
         confirmPassword: ""
     })
 
-    const onSignup = async (event:any) => {
+    const onSignup = async (event: any) => {
         event.preventDefault()
         try {
-            // const signUpResponce = await axios.post("/api/users/signup", signup)
-            // // console.log("sign up success", signUpResponce.data);
-            // router.push("/login")
             const response = await axios.post("/api/users/signup", signup);
             console.log("Signup success", response.data);
             router.push("/login");
@@ -40,7 +37,7 @@ const Signup = () => {
                 <h1 className='text-3xl font-light'>Signup to your account</h1>
                 <div className={styles.form_card}>
                     <div className='h-2 bg-indigo-400 rounded-t-md'></div>
-                    
+
                     <div className='px-8 py-6'>
                         <label className={styles.label}>Name <p className='text-red-500'>*</p></label>
                         <input
