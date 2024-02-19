@@ -9,6 +9,7 @@ const Signup = () => {
 
     const router = useRouter()
     const [signUpBtnDisabled, setSignUpBtnDisabled] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [signup, setSignup] = useState({
         name: "",
         email: "",
@@ -19,12 +20,16 @@ const Signup = () => {
     const onSignup = async (event: any) => {
         event.preventDefault()
         try {
+            setLoading(true)
             const response = await axios.post("/api/users/signup", signup);
             console.log("Signup success", response.data);
             router.push("/login");
 
         } catch (error) {
             console.log("sign-up failed", error);
+        }
+        finally {
+            setLoading(false)
         }
         console.log(signup);
 
@@ -76,7 +81,7 @@ const Signup = () => {
                             required
                         />
                         <div className='flex justify-between items-baseline'>
-                            <button type='submit' className={styles.button} onClick={onSignup}>Signup</button>
+                            <button type='submit' className={styles.button} onClick={onSignup}>{loading ? "Submitting..." : "Signup"}</button>
                             <Link className='text-sm hover:underline' href='/login'>Already have account?</Link>
                         </div>
                     </div>
